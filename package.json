@@ -1,0 +1,20 @@
+{
+  "name": "@thomas88/homepage",
+  "version": "1.0.0",
+  "description": "My personal homepage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomas88/homepage.git"
+  },
+  "author": "Thomas Obermüller",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/thomas88/homepage/issues"
+  },
+  "homepage": "https://github.com/thomas88/homepage#readme",
+  "private": true
+}
