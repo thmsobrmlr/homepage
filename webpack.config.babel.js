@@ -6,6 +6,9 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 import chalk from 'chalk';
 
+import precss from 'precss';
+import autoprefixer from 'autoprefixer';
+
 const env = process.env.WEBPACK_ENV;
 const host = '0.0.0.0';
 const port = '9000';
@@ -40,12 +43,15 @@ const config = {
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader', 'eslint-loader'] },
+      { test: /\.css$/, exclude: /node_modules/, loader: 'style-loader!css-loader!postcss-loader' },
+      { test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i, loader: 'url-loader?limit=10000' },
     ],
   },
   plugins,
   eslint: {
     configFile: '.eslintrc',
   },
+  postcss: [precss, autoprefixer],
 };
 
 if (env === 'dev') {
