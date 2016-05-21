@@ -19,18 +19,21 @@ const plugins = [
 ];
 
 let outputFileName;
+let outputPath;
 
 if (env === 'build') {
   plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true }));
   outputFileName = 'bundle.[chunkhash].min.js';
+  outputPath = `${__dirname}/build/prod`;
 } else {
   outputFileName = 'bundle.js';
+  outputPath = `${__dirname}/build/dev`;
 }
 
 const config = {
   entry: './src/index.js',
   output: {
-    path: `${__dirname}/build`,
+    path: outputPath,
     filename: outputFileName,
   },
   devtool: 'source-map',

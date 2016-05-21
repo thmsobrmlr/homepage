@@ -4,9 +4,11 @@
   "description": "My personal homepage",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -r build/*",
+    "clean:dev": "rm -rf build/dev",
+    "clean:prod": "rm -rf build/prod",
+    "predev": "npm run clean:dev",
     "dev": "WEBPACK_ENV=dev ./node_modules/.bin/webpack --watch --inline",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean:prod",
     "build": "WEBPACK_ENV=build ./node_modules/.bin/webpack",
     "predeploy": "npm run build",
     "deploy": "babel-node scripts/deploy.js",

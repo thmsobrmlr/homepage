@@ -13,7 +13,7 @@ const client = s3client.createClient({
 });
 
 const params = {
-  localDir: 'build',
+  localDir: 'build/prod',
   deleteRemoved: false,
   s3Params: {
     Bucket: process.env.AWS_S3_BUCKET,
