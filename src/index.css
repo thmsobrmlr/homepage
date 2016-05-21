@@ -1,3 +1,5 @@
+@import '../node_modules/sanitize.css/sanitize.css';
+
 $blue: #056ef0;
 
 body {
