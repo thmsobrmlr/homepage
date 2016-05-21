@@ -3,6 +3,8 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
+import chalk from 'chalk';
+
 const env = process.env.WEBPACK_ENV;
 const host = '0.0.0.0';
 const port = '9000';
@@ -47,7 +49,7 @@ if (env === 'dev') {
     }
   });
 
-  console.log(`Running at http://${host}:${port}/webpack-dev-server/`);
+  console.log(chalk.green.bold(`Running at http://${host}:${port}/webpack-dev-server/`));
 }
 
 module.exports = config;
