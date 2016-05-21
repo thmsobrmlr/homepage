@@ -44,6 +44,8 @@
     "precss": "^1.4.0",
     "s3": "^4.4.0",
     "style-loader": "^0.13.1",
+    "stylelint": "^6.5.0",
+    "stylelint-config-standard": "^8.0.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   }

@@ -8,6 +8,8 @@ import chalk from 'chalk';
 
 import precss from 'precss';
 import autoprefixer from 'autoprefixer';
+import stylelint from 'stylelint';
+import reporter from 'postcss-reporter';
 
 const env = process.env.WEBPACK_ENV;
 const host = '0.0.0.0';
@@ -51,7 +53,12 @@ const config = {
   eslint: {
     configFile: '.eslintrc',
   },
-  postcss: [precss, autoprefixer],
+  postcss: [
+    stylelint,
+    precss,
+    autoprefixer({ browsers: 'last 2 versions' }),
+    reporter({ clearMessages: true }),
+  ],
 };
 
 if (env === 'dev') {
