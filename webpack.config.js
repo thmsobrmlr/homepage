@@ -22,10 +22,13 @@ var config = {
   devtool: 'source-map',
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader', 'eslint-loader'] }
     ]
   },
-  plugins: plugins
+  plugins: plugins,
+  eslint: {
+    configFile: '.eslintrc'
+  }
 };
 
 if (env === 'dev') {
