@@ -2,6 +2,7 @@
 
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 import chalk from 'chalk';
 
@@ -9,12 +10,19 @@ const env = process.env.WEBPACK_ENV;
 const host = '0.0.0.0';
 const port = '9000';
 
-const plugins = [];
+const htmlWebpackConfig = {
+  template: 'public/index.html',
+};
+
+const plugins = [
+  new HtmlWebpackPlugin(htmlWebpackConfig),
+];
+
 let outputFileName;
 
 if (env === 'build') {
   plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true }));
-  outputFileName = 'bundle.min.js';
+  outputFileName = 'bundle.[chunkhash].min.js';
 } else {
   outputFileName = 'bundle.js';
 }
@@ -24,7 +32,6 @@ const config = {
   output: {
     path: `${__dirname}/build`,
     filename: outputFileName,
-    publicPath: `${__dirname}/public`,
   },
   devtool: 'source-map',
   module: {
