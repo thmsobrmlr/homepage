@@ -3,6 +3,7 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import chalk from 'chalk';
 
@@ -17,6 +18,7 @@ const port = '9000';
 
 const htmlWebpackConfig = {
   template: 'public/index.html',
+  chunksSortMode: 'dependency',
 };
 
 const plugins = [
@@ -25,14 +27,22 @@ const plugins = [
 
 let outputFileName;
 let outputPath;
+let cssLoader;
 
 if (env === 'build') {
+  // Minify js
   plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true }));
+
+  // Extract css to file
+  plugins.push(new ExtractTextPlugin('bundle.[chunkhash].min.css'));
+
   outputFileName = 'bundle.[chunkhash].min.js';
   outputPath = `${__dirname}/build/prod`;
+  cssLoader = ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader');
 } else {
   outputFileName = 'bundle.js';
   outputPath = `${__dirname}/build/dev`;
+  cssLoader = 'style-loader!css-loader!postcss-loader';
 }
 
 const config = {
@@ -44,8 +54,9 @@ const config = {
   devtool: 'source-map',
   module: {
     loaders: [
+      { test: /\.html$/, loader: 'html' },
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader', 'eslint-loader'] },
-      { test: /\.css$/, exclude: /node_modules/, loader: 'style-loader!css-loader!postcss-loader' },
+      { test: /\.css$/, exclude: /node_modules/, loader: cssLoader },
       { test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i, loader: 'url-loader?limit=10000' },
     ],
   },
