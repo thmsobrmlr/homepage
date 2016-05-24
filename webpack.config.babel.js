@@ -28,6 +28,7 @@ const plugins = [
 let outputFileName;
 let outputPath;
 let cssLoader;
+let entry;
 
 if (env === 'build') {
   // Minify js
@@ -39,14 +40,18 @@ if (env === 'build') {
   outputFileName = 'bundle.[chunkhash].min.js';
   outputPath = `${__dirname}/build/prod`;
   cssLoader = ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader');
+
+  entry = ['./src/index.js', './src/google-analytics.js'];
 } else {
   outputFileName = 'bundle.js';
   outputPath = `${__dirname}/build/dev`;
   cssLoader = 'style-loader!css-loader!postcss-loader';
+
+  entry = './src/index.js';
 }
 
 const config = {
-  entry: './src/index.js',
+  entry,
   output: {
     path: outputPath,
     filename: outputFileName,
