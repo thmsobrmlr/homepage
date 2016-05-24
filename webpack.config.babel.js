@@ -28,6 +28,7 @@ const plugins = [
 let outputFileName;
 let outputPath;
 let cssLoader;
+let vendorCssLoader;
 let entry;
 
 if (env === 'build') {
@@ -40,12 +41,14 @@ if (env === 'build') {
   outputFileName = 'bundle.[chunkhash].min.js';
   outputPath = `${__dirname}/build/prod`;
   cssLoader = ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader');
+  vendorCssLoader = ExtractTextPlugin.extract('style-loader', 'css-loader');
 
   entry = ['./src/index.js', './src/google-analytics.js'];
 } else {
   outputFileName = 'bundle.js';
   outputPath = `${__dirname}/build/dev`;
   cssLoader = 'style-loader!css-loader!postcss-loader';
+  vendorCssLoader = 'style-loader!css-loader';
 
   entry = './src/index.js';
 }
@@ -61,8 +64,12 @@ const config = {
     loaders: [
       { test: /\.html$/, loader: 'html' },
       { test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader', 'eslint-loader'] },
-      { test: /\.css$/, exclude: /node_modules/, loader: cssLoader },
+      { test: /index\.css$/, exclude: /node_modules/, loader: cssLoader },
+      { test: /vendor\.css$/, loader: vendorCssLoader },
       { test: /\.jpe?g$|\.gif$|\.png$|\.svg$/i, loader: 'url-loader?limit=10000' },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader:
+        'url-loader?limit=10000&minetype=application/font-woff' },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'file-loader' },
     ],
   },
   plugins,

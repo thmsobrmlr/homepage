@@ -1,7 +1,6 @@
+import './vendor.css';
 import './index.css';
 
-const name = 'Bob';
-const time = 'today';
+import deobfuscate from './deobfuscate-email';
 
-// eslint-disable-next-line no-alert
-alert(`Hello ${name}, how are you ${time}?`);
+deobfuscate();

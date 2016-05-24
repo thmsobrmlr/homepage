@@ -1,7 +1,79 @@
-@import '../node_modules/sanitize.css/sanitize.css';
+$color: #222;
+$backgroundColor: #f5f8f8;
 
-$blue: #056ef0;
+:root {
+  font-family: 'Oxygen', sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.8;
 
-body {
-  background: linear-gradient(red, $blue);
+  height: 100%;
+  padding-right: 10px;
+  padding-left: 10px;
+
+  text-align: center;
+
+  color: $color;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.85)), url('../public/img/bg.png');
+  background-color: $backgroundColor;
+  background-size: cover;
+}
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+.container {
+  lost-center: 600px 30px;
+}
+
+.profile-pic {
+  width: 200px;
+  height: 200px;
+  margin-top: 75px;
+
+  border-radius: 100%;
+}
+
+.headline {
+  font-size: 24px;
+  font-weight: 400;
+
+  margin-top: 25px;
+
+  letter-spacing: 1px;
+}
+
+.link {
+  color: #ccc;
+  text-decoration: none;
+  transition: all 0.3s linear;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 5px;
+}
+
+.link:hover {
+  color: #fff;
+  border-color: white;
+}
+
+.social-links {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+}
+
+.social-link {
+  margin-left: 1em;
+  display: inline-block;
+}
+
+.social-link:first-child {
+  margin-left: 0;
 }
